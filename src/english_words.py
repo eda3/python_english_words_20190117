@@ -4,6 +4,7 @@ import sys
 from selenium import webdriver
 from gyazo import Api
 import json
+import subprocess
 
 
 def main(args=sys.argv):
@@ -21,9 +22,11 @@ def main(args=sys.argv):
     h = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(w, h)
     driver.save_screenshot(image_filename)
-
     image_url = upload_image(image_filename)
-    print(image_url)
+
+    # make scrapbox page
+    project_url = 'https://scrapbox.io/eda-englishwords/'
+    make_scrapbox_page(project_url, args[1], image_url)
 
 
 def upload_image(image_filename):
@@ -40,7 +43,14 @@ def upload_image(image_filename):
         image_dict = json.loads(image_json)
         image_url = image_dict['url']
 
-        return image_url
+    return image_url
+
+
+def make_scrapbox_page(project_url, english_word, image_url):
+    image_tag = '[' + image_url + ']'
+
+    scrapbox_url = project_url + english_word + '?body=' + image_tag
+    subprocess.run(["open", scrapbox_url])
 
 
 if __name__ == "__main__":
