@@ -13,19 +13,20 @@ def main(args=sys.argv):
         sys.exit()
 
     # Google image search & save screenshot
+    image_filename = 'screenshot.png'
     url = 'https://www.google.com/search?q={}&tbm=isch'.format(args[1])
     driver = webdriver.Chrome()
     driver.get(url)
     w = driver.execute_script('return document.body.scrollWidth')
     h = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(w, h)
-    driver.save_screenshot('screenshot.png')
+    driver.save_screenshot(image_filename)
 
-    image_url = upload_image()
+    image_url = upload_image(image_filename)
     print(image_url)
 
 
-def upload_image():
+def upload_image(image_filename):
     if "API_TOKEN" not in os.environ:
         print("command `export API_TOKEN=hoge`")
 
@@ -33,7 +34,7 @@ def upload_image():
     client = Api(access_token=API_TOKEN)
 
     # Upload an image
-    with open('screenshot.png', 'rb') as f:
+    with open(image_filename, 'rb') as f:
         image = client.upload_image(f)
         image_json = image.to_json()
         image_dict = json.loads(image_json)
