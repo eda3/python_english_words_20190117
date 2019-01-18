@@ -6,7 +6,7 @@ from selenium import webdriver
 def main(args=sys.argv):
     # check arguments
     if len(args) == 1:
-        print("Add it to the first argument.")
+        print("Enter the first argument.")
         sys.exit()
 
     # Google image search & save screenshot
