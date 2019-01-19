@@ -28,14 +28,14 @@ def main(args=sys.argv):
     h = driver.execute_script('return document.body.scrollHeight')
     driver.set_window_size(w, h)
     driver.save_screenshot(image_filename)
-    image_url = upload_image(image_filename)
+    image_url = __upload_image(image_filename)
 
     # make scrapbox page
     PROJECT_URL = 'https://scrapbox.io/eda-englishwords/'
-    make_scrapbox_page(PROJECT_URL, search_word, image_url, meanings)
+    __make_scrapbox_page(PROJECT_URL, search_word, image_url, meanings)
 
 
-def upload_image(image_filename):
+def __upload_image(image_filename):
     if "API_TOKEN" not in os.environ:
         print("command `export API_TOKEN=hoge`")
 
@@ -52,7 +52,7 @@ def upload_image(image_filename):
     return image_url
 
 
-def make_scrapbox_page(project_url, english_word, image_url, meanings):
+def __make_scrapbox_page(project_url, english_word, image_url, meanings):
     image_tag = '[' + image_url + ']'
 
     linefeed_code = '%0A'
