@@ -32,7 +32,7 @@ def main(args=sys.argv):
 
     # make scrapbox page
     PROJECT_URL = 'https://scrapbox.io/eda-englishwords/'
-    make_scrapbox_page(PROJECT_URL, search_word, image_url)
+    make_scrapbox_page(PROJECT_URL, search_word, image_url, meanings)
 
 
 def upload_image(image_filename):
@@ -52,10 +52,17 @@ def upload_image(image_filename):
     return image_url
 
 
-def make_scrapbox_page(project_url, english_word, image_url):
+def make_scrapbox_page(project_url, english_word, image_url, meanings):
     image_tag = '[' + image_url + ']'
 
-    scrapbox_url = project_url + english_word + '?body=' + image_tag
+    linefeed_code = '%0A'
+    scrapbox_url = project_url + english_word
+    scrapbox_url += '?body='
+    for meaning in meanings:
+        scrapbox_url += ' [[' + meaning + ']]' + linefeed_code
+    scrapbox_url += image_tag
+
+    print(scrapbox_url)
     subprocess.run(["open", scrapbox_url])
 
 
