@@ -7,6 +7,7 @@ from gyazo import Api
 import json
 import subprocess
 import lookup_word
+import time
 
 
 def main(args=sys.argv):
@@ -55,14 +56,14 @@ def __upload_image(image_filename):
 def __make_scrapbox_page(project_url, english_word, image_url, meanings):
     image_tag = '[' + image_url + ']'
 
-    linefeed_code = '%0A'
     scrapbox_url = project_url + english_word
     scrapbox_url += '?body='
     for meaning in meanings:
-        scrapbox_url += ' [[' + meaning + ']]' + linefeed_code
+        scrapbox_url += '[[' + meaning + ']]' + '_____'
     scrapbox_url += image_tag
 
     print(scrapbox_url)
+
     subprocess.run(["open", scrapbox_url])
 
 
