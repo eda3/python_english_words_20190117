@@ -77,7 +77,7 @@ def cmd(phrase):
 
         try:
             japanese = mean_pair['phrase']['text']
-        except:
+        except KeyError:
             raise click.BadParameter("見つかりませんでした")
         english = mean_pair['meanings'] if 'meanings' in mean_pair else None
         mean = Meaning(phrase, japanese, english)
