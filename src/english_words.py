@@ -6,6 +6,7 @@ from selenium import webdriver
 from gyazo import Api
 import json
 import subprocess
+import lookup_word
 
 
 def main(args=sys.argv):
@@ -14,9 +15,13 @@ def main(args=sys.argv):
         print("Enter the first argument.")
         sys.exit()
 
+    # look up English meaning
+    search_word = args[1]
+    meanings = lookup_word.main(search_word)
+
     # Google image search & save screenshot
     image_filename = 'screenshot.png'
-    url = 'https://www.google.com/search?q={}&tbm=isch'.format(args[1])
+    url = 'https://www.google.com/search?q={}&tbm=isch'.format(search_word)
     driver = webdriver.Chrome()
     driver.get(url)
     w = driver.execute_script('return document.body.scrollWidth')
@@ -26,8 +31,8 @@ def main(args=sys.argv):
     image_url = upload_image(image_filename)
 
     # make scrapbox page
-    project_url = 'https://scrapbox.io/eda-englishwords/'
-    make_scrapbox_page(project_url, args[1], image_url)
+    PROJECT_URL = 'https://scrapbox.io/eda-englishwords/'
+    make_scrapbox_page(PROJECT_URL, search_word, image_url)
 
 
 def upload_image(image_filename):
