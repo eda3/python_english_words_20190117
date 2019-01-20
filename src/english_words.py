@@ -7,6 +7,7 @@ from gyazo import Api
 import json
 import subprocess
 import lookup_word
+import re
 
 
 def main(args=sys.argv):
@@ -60,6 +61,9 @@ def __make_scrapbox_page(project_url, english_word, image_url, meanings):
     for meaning in meanings:
         scrapbox_url += '[[' + meaning + ']]' + '_____'
     scrapbox_url += image_tag
+
+    # delete character reference(e.g. &nbsp;)
+    scrapbox_url = re.sub(r'&.*;', '', scrapbox_url)
 
     print(scrapbox_url)
     subprocess.run(["open", scrapbox_url])
