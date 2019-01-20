@@ -24,11 +24,12 @@ def __get_english_meanings(datas, limit):
     num = 0
     meanings = []
     for data in datas:
-        for meaning in data['meanings']:
-            meanings.append(meaning['text'])
-            num += 1
-            if num >= limit:
-                return meanings
+        if 'meanings' in data:
+            for meaning in data['meanings']:
+                meanings.append(meaning['text'])
+                num += 1
+                if num >= limit:
+                    return meanings
 
 
 def main(phrase=sys.argv[1]):
