@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 
 import os
+import platform
 import sys
 from selenium import webdriver
 from gyazo import Api
@@ -65,8 +66,16 @@ def __make_scrapbox_page(project_url, english_word, image_url, meanings):
     # delete character reference(e.g. &nbsp;)
     scrapbox_url = re.sub(r'&.*;', '', scrapbox_url)
 
-    print(scrapbox_url)
-    subprocess.run(["open", scrapbox_url])
+    scrapbox_url = '"' + scrapbox_url + '"'
+    cmd = "open " + scrapbox_url
+    subprocess.check_call(cmd, shell=True)
+
+    print("end")
+
+    # Mac限定
+    pf = platform.system()
+    if pf == 'Darwin':
+        subprocess.run(['say', english_word])
 
 
 if __name__ == "__main__":
