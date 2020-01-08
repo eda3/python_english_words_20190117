@@ -33,8 +33,8 @@ def main(args=sys.argv):
     image_url = __upload_image(image_filename)
 
     # make scrapbox page
-    PROJECT_URL = "https://scrapbox.io/eda-englishwords/"
-    __make_scrapbox_page(PROJECT_URL, search_word, image_url, meanings)
+    project_url = "https://scrapbox.io/eda-englishwords/"
+    __make_scrapbox_page(project_url, search_word, image_url, meanings)
 
 
 def __upload_image(image_filename):
