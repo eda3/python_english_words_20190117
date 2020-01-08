@@ -12,12 +12,12 @@ from selenium import webdriver
 
 
 def main(args=sys.argv):
-    # check arguments
+    # Check arguments
     if len(args) == 1:
         print("Enter the first argument.")
         sys.exit()
 
-    # look up English meaning
+    # Look up English meaning
     search_word = args[1]
     meanings = ""
 
@@ -32,7 +32,7 @@ def main(args=sys.argv):
     driver.save_screenshot(image_filename)
     image_url = __upload_image(image_filename)
 
-    # make scrapbox page
+    # Make scrapbox page
     project_url = "https://scrapbox.io/eda-englishwords/"
     __make_scrapbox_page(project_url, search_word, image_url, meanings)
 
@@ -63,7 +63,7 @@ def __make_scrapbox_page(project_url, english_word, image_url, meanings):
         scrapbox_url += "[[" + meaning + "]]" + "_____"
     scrapbox_url += image_tag
 
-    # delete character reference(e.g. &nbsp;)
+    # Delete character reference(e.g. &nbsp;)
     scrapbox_url = re.sub(r"&.*;", "", scrapbox_url)
 
     scrapbox_url = '"' + scrapbox_url + '"'
