@@ -1,13 +1,14 @@
 #!/usr/local/bin/python3
 
+import json
 import os
 import platform
-import sys
-from selenium import webdriver
-from gyazo import Api
-import json
-import subprocess
 import re
+import subprocess
+import sys
+
+from gyazo import Api
+from selenium import webdriver
 
 
 def main(args=sys.argv):
