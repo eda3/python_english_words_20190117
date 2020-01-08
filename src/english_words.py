@@ -23,7 +23,7 @@ def main(args=sys.argv):
 
     # Google image search & save screenshot
     image_filename = "screenshot.png"
-    url = "https://www.google.com/search?q={}&tbm=isch".format(search_word)
+    url = f"https://www.google.com/search?q={search_word}&tbm=isch&tbs=sur:fmc"
     driver = webdriver.Chrome()
     driver.get(url)
     w = driver.execute_script("return document.body.scrollWidth")
