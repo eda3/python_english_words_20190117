@@ -7,7 +7,6 @@ from selenium import webdriver
 from gyazo import Api
 import json
 import subprocess
-import lookup_word
 import re
 
 
@@ -19,7 +18,7 @@ def main(args=sys.argv):
 
     # look up English meaning
     search_word = args[1]
-    meanings = lookup_word.main(search_word)
+    meanings = ""
 
     # Google image search & save screenshot
     image_filename = 'screenshot.png'
